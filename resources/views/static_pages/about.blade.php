@@ -1,4 +1,7 @@
+<?php $title = "About Us"; ?>
 @extends("layouts.application")
+
+@section('contents')
 <h1>About Us</h1>
 <p>
     The <a href="http://railstutorial.jp/">Ruby on Rails Tutorial</a>
@@ -6,3 +9,4 @@
     with <a href="http://rubyonrails.org/">Ruby on Rails</a>. This
     is the sample application for the tutorial.
 </p>
+@endsection

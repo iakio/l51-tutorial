@@ -5,7 +5,8 @@ class StaticPagesTest extends TestCase
     function home_page_have_the_content_Sample_App() {
         $this->visit('static_pages/home')
             ->see("Sample App")
-            ->seeInTitle("Laravel Tutorial Sample App | Home");
+            ->seeInTitle("Laravel Tutorial Sample App")
+            ->dontSeeInTitle("| Home");
     }
 
     /** @test */

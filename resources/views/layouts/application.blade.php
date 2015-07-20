@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Laravel Tutorial Sample App | {{ $title }}</title>
+    <title>{{ full_title($title) }}</title>
 </head>
 <body>
 @yield('contents')

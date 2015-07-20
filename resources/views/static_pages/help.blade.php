@@ -1,4 +1,7 @@
+<?php $title = "Help"; ?>
 @extends("layouts.application")
+
+@section('contents')
 <h1>Help</h1>
 <p>
     Get help on the Ruby on Rails Tutorial at the
@@ -6,3 +9,4 @@
     To get help on this sample app, see the
     <a href="http://railstutorial.jp/book">Rails Tutorial book</a>.
 </p>
+@endsection

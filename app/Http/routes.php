@@ -16,11 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('static_pages/home', function () {
-    return view('static_pages.home')->withTitle("Home");
+    return view('static_pages.home');
 });
 Route::get('static_pages/help', function () {
-    return view('static_pages.help')->withTitle("Help");
+    return view('static_pages.help');
 });
 Route::get('static_pages/about', function () {
-    return view('static_pages.about')->withTitle("About Us");
+    return view('static_pages.about');
 });
