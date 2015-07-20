@@ -11,16 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-Route::get('static_pages/home', function () {
+Route::get('/', function () {
     return view('static_pages.home');
 });
-Route::get('static_pages/help', function () {
+
+Route::get('help', function () {
     return view('static_pages.help');
 });
-Route::get('static_pages/about', function () {
+
+Route::get('about', function () {
     return view('static_pages.about');
 });

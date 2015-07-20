@@ -3,7 +3,7 @@ class StaticPagesTest extends TestCase
 {
     /** @test */
     function home_page_have_the_content_Sample_App() {
-        $this->visit('static_pages/home')
+        $this->visit('/')
             ->see("Sample App")
             ->seeInTitle("Laravel Tutorial Sample App")
             ->dontSeeInTitle("| Home");
@@ -11,14 +11,14 @@ class StaticPagesTest extends TestCase
 
     /** @test */
     function help_page_have_the_content_Help() {
-        $this->visit('static_pages/help')
+        $this->visit('help')
             ->see("Help")
             ->seeInTitle("Laravel Tutorial Sample App | Help");
     }
 
     /** @test */
     function about_page_have_the_content_About_Us() {
-        $this->visit('static_pages/about')
+        $this->visit('about')
             ->see("About Us")
             ->seeInTitle("Laravel Tutorial Sample App | About Us");
     }
