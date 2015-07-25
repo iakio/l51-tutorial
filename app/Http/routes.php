@@ -23,3 +23,5 @@ Route::get('help', function () {
 Route::get('about', function () {
     return view('static_pages.about');
 });
+
+Route::controller('auth', 'Auth\AuthController');
