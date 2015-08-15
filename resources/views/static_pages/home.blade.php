@@ -9,6 +9,6 @@
         <a href="http://railstutorial.jp">Ruby on Rails Tutorial</a>
         sample application.
     </h2>
-    <a class="btn btn-large btn-primary" href="#">Sign up now!</a>
+    <a class="btn btn-large btn-primary" href="/auth/register">Sign up now!</a>
 </div>
 @endsection

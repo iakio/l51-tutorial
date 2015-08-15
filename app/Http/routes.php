@@ -24,4 +24,5 @@ Route::get('about', function () {
     return view('static_pages.about');
 });
 
-Route::controller('auth', 'Auth\AuthController');
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
