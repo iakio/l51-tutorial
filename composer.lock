@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6931fe92193d04ff21041a6cac730385",
+    "hash": "e1cfc6cb0013de220520bafe64bd9211",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1898,6 +1898,127 @@
             "time": "2015-05-11 14:41:42"
         },
         {
+            "name": "iakio/gntp-notify",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iakio/gntp-notify.git",
+                "reference": "5b0f177d3efaf6a90d23796bba4069690bede120"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iakio/gntp-notify/zipball/5b0f177d3efaf6a90d23796bba4069690bede120",
+                "reference": "5b0f177d3efaf6a90d23796bba4069690bede120",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "iakio\\GntpNotify": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ISHIDA Akio",
+                    "email": "iakio.monospacenet@gmail.com"
+                }
+            ],
+            "description": "Simple GNTP notification library",
+            "keywords": [
+                "gntp",
+                "growl",
+                "notification"
+            ],
+            "time": "2014-08-14 10:33:13"
+        },
+        {
+            "name": "iakio/phpunit-growlprinter",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iakio/phpunit-growlprinter.git",
+                "reference": "737cb283f299a3b277393dc4f62bec72d2c6c452"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iakio/phpunit-growlprinter/zipball/737cb283f299a3b277393dc4f62bec72d2c6c452",
+                "reference": "737cb283f299a3b277393dc4f62bec72d2c6c452",
+                "shasum": ""
+            },
+            "require": {
+                "iakio/gntp-notify": "~0.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.6,<5.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "iakio\\phpunit": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "ISHIDA Akio",
+                    "email": "iakio.monospacenet@gmail.com"
+                }
+            ],
+            "description": "PHPUnit Growl(GNTP) Printer",
+            "keywords": [
+                "gntp",
+                "growl",
+                "notification",
+                "phpunit"
+            ],
+            "time": "2015-07-04 10:53:29"
+        },
+        {
+            "name": "iakio/phpunit-smartrunner",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iakio/phpunit-smartrunner.git",
+                "reference": "1d119ee19086209e18588902d8996fdb2ee4664a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iakio/phpunit-smartrunner/zipball/1d119ee19086209e18588902d8996fdb2ee4664a",
+                "reference": "1d119ee19086209e18588902d8996fdb2ee4664a",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xdebug": "*"
+            },
+            "bin": [
+                "bin/smartrunner"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "iakio\\phpunit": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "keywords": [
+                "phpunit"
+            ],
+            "support": {
+                "source": "https://github.com/iakio/phpunit-smartrunner/tree/master",
+                "issues": "https://github.com/iakio/phpunit-smartrunner/issues"
+            },
+            "time": "2015-08-15 06:00:21"
+        },
+        {
             "name": "mockery/mockery",
             "version": "0.9.4",
             "source": {
@@ -2973,7 +3094,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "iakio/phpunit-smartrunner": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

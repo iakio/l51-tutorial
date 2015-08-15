@@ -4,6 +4,12 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/iakio/phpunit-smartrunner"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
@@ -13,7 +19,9 @@
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
-        "phpspec/phpspec": "~2.1"
+        "phpspec/phpspec": "~2.1",
+        "iakio/phpunit-growlprinter": "^0.2.0",
+        "iakio/phpunit-smartrunner": "dev-master"
     },
     "autoload": {
         "classmap": [

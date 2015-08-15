@@ -8,7 +8,10 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         syntaxCheck="false">
+         syntaxCheck="false"
+         printerClass="iakio\phpunit\GrowlPrinter"
+         printerFile="vendor/iakio/phpunit-growlprinter/src/iakio/phpunit/GrowlPrinter.php">
+>
     <testsuites>
         <testsuite name="Application Test Suite">
             <directory>./tests/</directory>
@@ -19,6 +22,9 @@
             <directory suffix=".php">app/</directory>
         </whitelist>
     </filter>
+    <listeners>
+        <listener class="iakio\phpunit\smartrunner\DependencyListener" />
+    </listeners>
     <php>
         <env name="APP_ENV" value="testing"/>
         <env name="CACHE_DRIVER" value="array"/>
