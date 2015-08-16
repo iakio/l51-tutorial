@@ -24,5 +24,10 @@ Route::get('about', function () {
     return view('static_pages.about');
 });
 
+Route::get('users/{id}', function ($id) {
+    $user = \App\User::find($id);
+    return view('users/show')->with("user", $user);
+});
+
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
