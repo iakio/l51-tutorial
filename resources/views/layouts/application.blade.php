@@ -7,6 +7,9 @@
 <body>
 @include('layouts.header')
 <div class="container">
+    @if (session()->get('success'))
+    <div class="alert alert-success">{{ session()->get('success') }}</div>
+    @endif
     @yield('contents')
     @include('layouts.footer')
 </div>
