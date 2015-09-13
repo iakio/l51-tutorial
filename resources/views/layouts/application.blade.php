@@ -8,7 +8,12 @@
 @include('layouts.header')
 <div class="container">
     @if (session()->get('success'))
-    <div class="alert alert-success">{{ session()->get('success') }}</div>
+        <div class="alert alert-success">{{ session()->get('success') }}</div>
+    @endif
+    @if (count(@errors) > 0)
+         @foreach ($errors->all() as $error)
+            <div class="alert alert-error">{{ $error }}</div>
+         @endforeach
     @endif
     @yield('contents')
     @include('layouts.footer')

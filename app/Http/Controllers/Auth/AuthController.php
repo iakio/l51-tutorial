@@ -81,4 +81,18 @@ class AuthController extends Controller
         $request->session()->flash("success", "Welcome to the Sample App!");
         return redirect($this->redirectPath());
     }
+
+    protected function getFailedLoginMessage()
+    {
+        return "Invalid email/password combination";
+    }
+
+    public function redirectPath()
+    {
+        $user = Auth::user();
+        if ($user) {
+            return "users/" . $user->id;
+        }
+        return "/";
+    }
 }
