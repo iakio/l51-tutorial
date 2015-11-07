@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
+use Flash;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -78,7 +79,7 @@ class AuthController extends Controller
         }
 
         Auth::login($this->create($request->all()));
-        $request->session()->flash("success", "Welcome to the Sample App!");
+        Flash::success("Welcome to the Sample App!");
         return redirect($this->redirectPath());
     }
 
