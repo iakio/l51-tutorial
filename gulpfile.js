@@ -13,5 +13,7 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass("app.scss")
+        .copy("node_modules/bootstrap-sass/js/bootstrap-dropdown.js","public/js/")
+        .copy("node_modules/jquery/dist/jquery.js","public/js/")
         .phpUnit();
 });

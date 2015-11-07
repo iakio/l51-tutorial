@@ -5,3 +5,4 @@ Homestead.yaml
 /.idea
 *.swp
 public/css/
+public/js/
