@@ -35,5 +35,6 @@ class UserPagesTest extends TestCase
             ->type('foobar', 'password_confirmation')
             ->press('Create my account');
         $this->assertEquals(1, App\User::count());
+        $this->assertContains('Welcome', $this->crawler->filter('div.alert.alert-success')->text());
     }
 }

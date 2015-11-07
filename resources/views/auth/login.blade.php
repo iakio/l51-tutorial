@@ -6,6 +6,13 @@
 
 <div class="row">
     <div class="span6 offset3">
+        @if (count($errors) > 0)
+            <div id="error_explanation">
+                @foreach ($errors->all() as $error)
+                    <div class="alert alert-error">{{ $error }}</div>
+                @endforeach
+            </div>
+        @endif
         {!! Form::open(['action' => 'Auth\AuthController@postLogin']) !!}
             {!! Form::label('email') !!}
             {!! Form::text('email') !!}
