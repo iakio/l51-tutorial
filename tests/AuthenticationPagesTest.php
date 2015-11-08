@@ -10,22 +10,27 @@ class AuthenticationPagesTest extends TestCase
             ->type('a', 'email')
             ->type('a', 'password')
             ->press('Sign in')
+            ->seeInElement('div.alert.alert-error', 'Invalid')
         ;
-        $this->assertContains('Invalid', $this->crawler->filter('div.alert.alert-error')->text());
     }
 
     /** @test */
     function sign_in_with_valid_information() {
-        $user = factory(App\User::class)->make();
-        App\User::create([
-            'name' => $user->name,
-            'email' => $user->email,
-            'password' => bcrypt($user->password),
+        $input = factory(App\User::class)->make();
+        $user = App\User::create([
+            'name' => $input->name,
+            'email' => $input->email,
+            'password' => bcrypt($input->password),
         ]);
         $this->visit('auth/login')
-            ->type($user->email, 'email')
-            ->type($user->password, 'password')
+            ->type($input->email, 'email')
+            ->type($input->password, 'password')
             ->press('Sign in')
-            ->see($user->name);
+            ->seePageIs('users/'.$user->id)
+            ->see($user->name)
+            ->dontSeeLink('Sign in')
+            ->seeLink('Sign out', 'auth/logout')
+            ->seeLink('Profile', 'users/'.$user->id)
+            ;
     }
 }
