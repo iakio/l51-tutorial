@@ -6,18 +6,7 @@
 
 <div class="row">
     <div class="span6 offset3">
-        @if (count($errors) > 0)
-            <div id="error_explanation">
-                <div class="alert alert-error">
-                    The form contains {{ Html::pluralize(count($errors), "error") }}.
-                </div>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>* {{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('shared/error_messages')
         {!! Form::open(['action' => 'Auth\AuthController@postRegister']) !!}
 
         {!! Form::label('name') !!}

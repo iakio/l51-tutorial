@@ -13,7 +13,7 @@
                                 Account <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{ url('users/'.Auth::user()->id) }}">Profile</a></li>
+                                <li><a href="{{ action('UsersController@show', Auth::user()->id) }}">Profile</a></li>
                                 <li><a href="{{ action('UsersController@edit', Auth::user()->id) }}">Settings</a></li>
                                 <li class="divider"></li>
                                 <li>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Flash;
+use Log;
 
 class UsersController extends Controller
 {
@@ -18,7 +19,7 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = \App\User::find($id);
+        $user = User::find($id);
         return view('users/show')->with("user", $user);
     }
 
@@ -30,7 +31,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        $user = \App\User::find($id);
+        $user = User::find($id);
         return view('users/edit')->with("user", $user);
     }
 
@@ -43,8 +44,8 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        \Log::info($request->all());
-        $user = \App\User::findOrFail($id);
+        Log::info($request->all());
+        $user = User::findOrFail($id);
         $validators = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,'.$id,
@@ -57,7 +58,7 @@ class UsersController extends Controller
         ];
 
         $this->validate($request, $validators);
-        if ($user->update($attributes)) { 
+        if ($user->update($attributes)) {
             Flash::success("Profile updated");
             return redirect(action('UsersController@show', $user->id));
         }
