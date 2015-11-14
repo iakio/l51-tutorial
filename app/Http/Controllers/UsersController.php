@@ -13,7 +13,7 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => 'edit']);
+        $this->middleware('auth', ['only' => ['edit', 'update']]);
     }
 
     /**
@@ -49,7 +49,6 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Log::info($request->all());
         $user = User::findOrFail($id);
         $validators = [
             'name' => 'required|max:255',

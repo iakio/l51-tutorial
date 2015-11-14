@@ -42,4 +42,12 @@ class AuthenticationPagesTest extends TestCase
             ->seeInElement('title', 'Sign in')
             ;
     }
+
+    /** @test */
+    function non_signed_in_user_submitting_to_the_update_action() {
+        $user = factory(App\User::class)->create();
+        $this->call('post', action('UsersController@update', $user->id));
+        $this->assertResponseStatus(500);
+        //$this->assertRedirectedTo('auth/login');
+    }
 }
