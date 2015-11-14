@@ -1,4 +1,3 @@
-<?php
 @if (count($errors) > 0)
     <div id="error_explanation">
         <div class="alert alert-error">
