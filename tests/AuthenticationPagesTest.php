@@ -34,4 +34,12 @@ class AuthenticationPagesTest extends TestCase
             ->seeLink('Settings', 'users/'.$user->id.'/edit')
             ;
     }
+
+    /** @test */
+    function non_signed_in_user_visiting_the_edit_page() {
+        $user = factory(App\User::class)->create();
+        $this->visit(action('UsersController@edit', $user->id))
+            ->seeInElement('title', 'Sign in')
+            ;
+    }
 }

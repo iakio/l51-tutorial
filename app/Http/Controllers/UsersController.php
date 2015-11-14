@@ -11,6 +11,11 @@ use Log;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => 'edit']);
+    }
+
     /**
      * Display the specified resource.
      *
