@@ -31,6 +31,7 @@ class AuthenticationPagesTest extends TestCase
             ->dontSeeLink('Sign in')
             ->seeLink('Sign out', 'auth/logout')
             ->seeLink('Profile', 'users/'.$user->id)
+            ->seeLink('Settings', 'users/'.$user->id.'/edit')
             ;
     }
 }

@@ -24,10 +24,9 @@ Route::get('about', function () {
     return view('static_pages.about');
 });
 
-Route::get('users/{id}', function ($id) {
-    $user = \App\User::find($id);
-    return view('users/show')->with("user", $user);
-});
+Route::get('users/{id}',      'UsersController@show');
+Route::get('users/{id}/edit', 'UsersController@edit');
+Route::post('users/{id}',     'UsersController@update');
 
 Route::get('auth/register',  'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
