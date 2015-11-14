@@ -50,4 +50,15 @@ class AuthenticationPagesTest extends TestCase
         $this->assertResponseStatus(500);
         //$this->assertRedirectedTo('auth/login');
     }
+
+    /** @test */
+    function wrong_user_visiting_the_edit_page() {
+        $user = factory(App\User::class)->create();
+        $wrong_user = factory(App\User::class)->create();
+        $this->actingAs($user)
+            ->call('get', action('UsersController@edit', $wrong_user->id))
+        ;
+        $this->assertRedirectedTo('/');
+    }
+
 }
