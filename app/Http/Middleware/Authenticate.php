@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Flash;
 
 class Authenticate
 {
@@ -38,6 +39,7 @@ class Authenticate
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
+                Flash::warning('Please sign in.');
                 return redirect()->guest('auth/login');
             }
         }
