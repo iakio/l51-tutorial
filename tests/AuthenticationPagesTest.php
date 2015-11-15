@@ -47,8 +47,8 @@ class AuthenticationPagesTest extends TestCase
     function non_signed_in_user_submitting_to_the_update_action() {
         $user = factory(App\User::class)->create();
         $this->call('post', action('UsersController@update', $user->id));
-        $this->assertResponseStatus(500);
         //$this->assertRedirectedTo('auth/login');
+        $this->assertResponseStatus(500);
     }
 
     /** @test */
@@ -59,6 +59,17 @@ class AuthenticationPagesTest extends TestCase
             ->call('get', action('UsersController@edit', $wrong_user->id))
         ;
         $this->assertRedirectedTo('/');
+    }
+
+    /** @test */
+    function wrong_user_submitting_to_the_update_action() {
+        $user = factory(App\User::class)->create();
+        $wrong_user = factory(App\User::class)->create();
+        $this->actingAs($user)
+            ->call('post', action('UsersController@update', $wrong_user->id));
+        ;
+        //$this->assertRedirectedTo('/');
+        $this->assertResponseStatus(500);
     }
 
 }
