@@ -14,14 +14,18 @@ class AuthenticationPagesTest extends TestCase
         ;
     }
 
-    /** @test */
-    function sign_in_with_valid_information() {
-        $input = factory(App\User::class)->make();
-        $user = App\User::create([
+    function createUser($input) {
+        return App\User::create([
             'name' => $input->name,
             'email' => $input->email,
             'password' => bcrypt($input->password),
         ]);
+    }
+
+    /** @test */
+    function sign_in_with_valid_information() {
+        $input = factory(App\User::class)->make();
+        $user = $this->createUser($input);
         $this->visit('auth/login')
             ->type($input->email, 'email')
             ->type($input->password, 'password')
@@ -72,4 +76,17 @@ class AuthenticationPagesTest extends TestCase
         $this->assertResponseStatus(500);
     }
 
+    /** @test */
+    function friendly_forwarding() {
+        $input = factory(App\User::class)->make();
+        $user = $this->createUser($input);
+        $this->visit(action('UsersController@edit', $user->id))
+            ->type($input->email, 'email')
+            ->type($input->password, 'password')
+            ->press('Sign in')
+            ->seePageIs(action('UsersController@edit', $user->id))
+            ->seeInElement('title', 'Edit user')
+            ;
+
+    }
 }
