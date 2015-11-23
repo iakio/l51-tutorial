@@ -27,6 +27,7 @@ Route::get('about', function () {
 Route::get('users/{id}',      'UsersController@show');
 Route::get('users/{id}/edit', 'UsersController@edit');
 Route::post('users/{id}',     'UsersController@update');
+Route::get('users',           'UsersController@index');
 
 Route::get('auth/register',  'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');

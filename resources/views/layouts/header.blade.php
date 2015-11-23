@@ -7,7 +7,7 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="/help">Help</a></li>
                     @if (Auth::check())
-                        <li><a href="#">Users</a></li>
+                        <li><a href="{{ action('UsersController@index') }}">Users</a></li>
                         <li id="fat-menu" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 Account <b class="caret"></b>

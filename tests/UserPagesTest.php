@@ -70,4 +70,18 @@ class UserPagesTest extends TestCase
             ;
         $this->assertEquals($new_name, $user->fresh()->name);
     }
+
+    /** @test */
+    function index_page_should_list_each_user() {
+        $user = factory(App\User::class)->create();
+        factory(App\User::class)->create(['name' => 'Bob', 'email' => 'bob@example.com']);
+        factory(App\User::class)->create(['name' => 'Ben', 'email' => 'ben@example.com']);
+        $this->actingAs($user)
+            ->visit(action('UsersController@index'))
+            ->seeInElement('title', 'All users')
+            ;
+        App\User::all()->each(function ($user) {
+            $this->see($user->name);
+        });
+    }
 }

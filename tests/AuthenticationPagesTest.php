@@ -34,6 +34,7 @@ class AuthenticationPagesTest extends TestCase
             ->see($user->name)
             ->dontSeeLink('Sign in')
             ->seeLink('Sign out', 'auth/logout')
+            ->seeLink('Users', 'users/')
             ->seeLink('Profile', 'users/'.$user->id)
             ->seeLink('Settings', 'users/'.$user->id.'/edit')
             ;
@@ -87,6 +88,15 @@ class AuthenticationPagesTest extends TestCase
             ->seePageIs(action('UsersController@edit', $user->id))
             ->seeInElement('title', 'Edit user')
             ;
+    }
 
+    /** @test */
+    function non_signed_in_user_visiting_the_user_index() {
+        $input = factory(App\User::class)->make();
+        $user = $this->createUser($input);
+
+        $this->visit(action('UsersController@index'))
+            ->see('Sign in')
+            ;
     }
 }

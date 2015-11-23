@@ -13,8 +13,18 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['edit', 'update']]);
+        $this->middleware('auth', ['only' => ['index', 'edit', 'update']]);
         $this->middleware('correct_user', ['only' => ['edit', 'update']]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('users/index')->with("users", User::all());
     }
 
     /**
