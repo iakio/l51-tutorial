@@ -27,10 +27,10 @@ class AppServiceProvider extends ServiceProvider
             }
             return $count . ' ' . str_plural($noun);
         });
-        Html::macro('gravatar_for', function ($user) {
+        Html::macro('gravatar_for', function ($user, $options = ['size' => 50]) {
             $gravatar_id = md5(strtolower($user->email));
-            $gravatar_url = "https://secure.gravatar.com/avatar/$gravatar_id";
-            return "<img src=\"$gravatar_url\">";
+            $gravatar_url = "https://secure.gravatar.com/avatar/$gravatar_id?s={$options['size']}";
+            return "<img src=\"$gravatar_url\" alt=\"{$user->name}\" class=\"gravatar\">";
         });
     }
 
