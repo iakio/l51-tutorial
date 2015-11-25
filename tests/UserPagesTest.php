@@ -73,14 +73,13 @@ class UserPagesTest extends TestCase
 
     /** @test */
     function index_page_should_list_each_user() {
+        factory(App\User::class, 30)->create();
         $user = factory(App\User::class)->create();
-        factory(App\User::class)->create(['name' => 'Bob', 'email' => 'bob@example.com']);
-        factory(App\User::class)->create(['name' => 'Ben', 'email' => 'ben@example.com']);
         $this->actingAs($user)
             ->visit(action('UsersController@index'))
             ->seeInElement('title', 'All users')
             ;
-        App\User::all()->each(function ($user) {
+        App\User::paginate(30)->each(function ($user) {
             $this->see($user->name);
         });
     }

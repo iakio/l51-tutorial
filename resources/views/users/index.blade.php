@@ -4,6 +4,9 @@
 @section('contents')
 <h1>All users</h1>
 
+<nav class="pagination">
+    {!! $users->render() !!}
+</nav>
 <ul class="users">
     @foreach ($users as $user)
         <li>
@@ -12,4 +15,7 @@
         </li>
     @endforeach
 </ul>
+<nav class="pagination">
+    {!! $users->render() !!}
+</nav>
 @endsection
