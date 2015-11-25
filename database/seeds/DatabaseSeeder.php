@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,17 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        factory(User::class)->create([
+            'name' => 'Example User',
+            'email' => 'example@railstutorial.jp',
+            'password' => bcrypt('foobar'),
+        ]);
+        factory(User::class, 99)->make()->each(function(User $user, $i) {
+            $user->save([
+                'email' => "example-{$i}@railstutorial.jp",
+                'password' => bcrypt('password'),
+            ]);
+        });
 
         Model::reguard();
     }
