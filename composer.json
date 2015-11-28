@@ -16,7 +16,8 @@
         "mockery/mockery": "0.9.*",
         "phpunit/phpunit": "~4.0",
         "phpspec/phpspec": "~2.1",
-        "iakio/phpunit-smartrunner": "*"
+        "iakio/phpunit-smartrunner": "*",
+        "laracasts/generators": "^1.1"
     },
     "autoload": {
         "classmap": [
