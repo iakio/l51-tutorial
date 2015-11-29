@@ -12,6 +12,9 @@
         <li>
             {!! Html::gravatar_for($user, ['size' => 52]) !!}
             <a href="{{ action('UsersController@show', $user->id) }}">{{ $user->name }}</a>
+            @if (Auth::user()->admin)
+                <a href="">delete</a>
+            @endif
         </li>
     @endforeach
 </ul>

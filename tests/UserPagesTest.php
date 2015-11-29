@@ -83,4 +83,19 @@ class UserPagesTest extends TestCase
             $this->see($user->name);
         });
     }
+
+    /** @test  */
+    function index_page_should_have_delete_link_if_admin() {
+        factory(App\User::class, 30)->create();
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)
+            ->visit(action('UsersController@index'))
+            ->dontSeeLink('delete')
+            ;
+        $admin = factory(App\User::class, 'admin')->create();
+        $this->actingAs($admin)
+            ->visit(action('UsersController@index'))
+            ->seeLink('delete')
+         ;
+    }
 }
