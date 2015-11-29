@@ -16,9 +16,10 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         factory(User::class)->create([
-            'name' => 'Example User',
-            'email' => 'example@railstutorial.jp',
+            'name'     => 'Example User',
+            'email'    => 'example@railstutorial.jp',
             'password' => bcrypt('foobar'),
+            'admin'    => true
         ]);
         factory(User::class, 99)->make()->each(function(User $user, $i) {
             $user->save([
