@@ -16,5 +16,6 @@ elixir(function(mix) {
         .copy("node_modules/bootstrap-sass/js/bootstrap-alert.js","public/js/")
         .copy("node_modules/bootstrap-sass/js/bootstrap-dropdown.js","public/js/")
         .copy("node_modules/jquery/dist/jquery.js","public/js/")
+        .copy("node_modules/jquery-ujs/src/rails.js", "public/js/")
         .phpUnit();
 });
