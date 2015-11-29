@@ -99,4 +99,17 @@ class AuthenticationPagesTest extends TestCase
             ->see('Sign in')
             ;
     }
+
+    /** @test */
+    function non_admin_user_submitting_a_delete_request()
+    {
+        $user = factory('App\User')->create();
+        $non_admin = factory('App\User')->create();
+        $this->actingAs($non_admin)
+            ->visit(action('UsersController@index'))
+            ->makeRequest('delete', action('UsersController@destroy', $user->id), [
+                '_token' => csrf_token()
+            ])
+            ->seePageIs('/');
+    }
 }

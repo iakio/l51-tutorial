@@ -13,8 +13,9 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['only' => ['index', 'edit', 'update']]);
+        $this->middleware('auth', ['only' => ['index', 'edit', 'update', 'destroy']]);
         $this->middleware('correct_user', ['only' => ['edit', 'update']]);
+        $this->middleware('admin', ['only' => ['destroy']]);
     }
 
     /**
@@ -78,5 +79,19 @@ class UsersController extends Controller
             return redirect(action('UsersController@show', $user->id));
         }
         return view('users/edit')->with("user", $user);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        User::findOrFail($id)->delete();
+        Flash::success('User destroyed.');
+        return redirect('users');
     }
 }

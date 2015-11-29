@@ -28,6 +28,7 @@ Route::get('users/{id}',      'UsersController@show');
 Route::get('users/{id}/edit', 'UsersController@edit');
 Route::post('users/{id}',     'UsersController@update');
 Route::get('users',           'UsersController@index');
+Route::delete('users/{id}',   'UsersController@destroy');
 
 Route::get('auth/register',  'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');

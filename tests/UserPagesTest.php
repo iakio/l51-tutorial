@@ -85,17 +85,22 @@ class UserPagesTest extends TestCase
     }
 
     /** @test  */
-    function index_page_should_have_delete_link_if_admin() {
-        factory(App\User::class, 30)->create();
-        $user = factory(App\User::class)->create();
-        $this->actingAs($user)
+    function admin_user_should_be_able_to_delete_another_user() {
+        $users = factory(App\User::class, 30)->create();
+        $admin = factory(App\User::class, 'admin')->create();
+        $this->actingAs($users->first())
             ->visit(action('UsersController@index'))
             ->dontSeeLink('delete')
             ;
-        $admin = factory(App\User::class, 'admin')->create();
+
+        $count = App\User::count();
         $this->actingAs($admin)
             ->visit(action('UsersController@index'))
             ->seeLink('delete')
-         ;
+            ->makeRequest('delete', action('UsersController@destroy', $users->first()->id), [
+                '_token' => csrf_token()
+            ])
+            ->assertEquals($count - 1, App\User::count())
+        ;
     }
 }
