@@ -37,4 +37,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return (bool) $value;
     }
+
+    public function microposts()
+    {
+        return $this->hasMany(Micropost::class)->orderBy('created_at', 'DESC');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+        static::deleted(function (User $user) {
+            $user->microposts()->delete();
+        });
+    }
 }

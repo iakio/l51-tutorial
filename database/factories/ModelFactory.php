@@ -29,3 +29,9 @@ $factory->defineAs(App\User::class, 'admin', function ($faker) {
         'admin' => true
     ];
 });
+
+$factory->define(App\Micropost::class, function ($faker) {
+    return [
+        'content' => $faker->phrase
+    ];
+});
