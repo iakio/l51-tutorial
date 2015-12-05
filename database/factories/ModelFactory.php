@@ -32,6 +32,6 @@ $factory->defineAs(App\User::class, 'admin', function ($faker) {
 
 $factory->define(App\Micropost::class, function ($faker) {
     return [
-        'content' => $faker->phrase
+        'content' => $faker->paragraph()
     ];
 });
