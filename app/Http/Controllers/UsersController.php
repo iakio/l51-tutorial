@@ -37,7 +37,11 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users/show')->with("user", $user);
+        $microposts = $user->microposts()->paginate(30);
+        return view('users/show')->with([
+            "user" => $user,
+            "microposts" => $microposts
+        ]);
     }
 
     /**

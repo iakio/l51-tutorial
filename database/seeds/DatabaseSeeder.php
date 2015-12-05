@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Micropost;
 
 class DatabaseSeeder extends Seeder
 {
@@ -26,6 +27,12 @@ class DatabaseSeeder extends Seeder
                 'email' => "example-{$i}@railstutorial.jp",
                 'password' => bcrypt('password'),
             ]);
+        });
+
+        User::all()->take(6)->each(function (User $user) {
+            $user->microposts()->saveMany(
+                factory(Micropost::class, 50)->make()
+            );
         });
 
         Model::reguard();
