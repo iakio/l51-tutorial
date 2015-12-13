@@ -112,4 +112,13 @@ class AuthenticationPagesTest extends TestCase
             ])
             ->seePageIs('/');
     }
+
+
+    /** @test */
+    function non_sign_in_user_submitting_to_the_create_action()
+    {
+        $this->withoutMiddleware()
+            ->call('post', action('MicropostsController@store'), ['content' => 'Lorem']);
+        $this->assertResponseStatus(403);
+    }
 }
