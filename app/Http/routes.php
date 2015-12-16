@@ -13,7 +13,12 @@
 
 
 Route::get('/', function () {
-    return view('static_pages.home');
+    if (Auth::check()) {
+        $feed_items = Auth::user()->feed()->paginate();
+    } else {
+        $feed_items = [];
+    }
+    return view('static_pages.home')->with(['feed_items' => $feed_items]);
 });
 
 Route::get('help', function () {

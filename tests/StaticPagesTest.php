@@ -1,6 +1,9 @@
 <?php
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 class StaticPagesTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /** @test */
     function home_page_have_the_content_Sample_App() {
         $this->visit('/')
@@ -34,4 +37,18 @@ class StaticPagesTest extends TestCase
         $this->assertContains($text, $this->crawler->filter("title")->text());
         return $this;
     }
+
+    /** @test */
+    function home_page_should_render_ther_users_feed()
+    {
+        $user = factory(App\User::class)->create();
+        factory(App\Micropost::class)->create(['user_id' => $user->id]);
+        factory(App\Micropost::class)->create(['user_id' => $user->id]);
+        $this->actingAs($user)
+            ->visit('/');
+        $user->feed()->get()->each(function ($item) {
+            $this->seeInElement("li#{$item->id}", $item->content);
+        });
+    }
+
 }

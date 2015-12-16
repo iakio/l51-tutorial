@@ -43,6 +43,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany(Micropost::class)->orderBy('created_at', 'DESC');
     }
 
+    public function feed()
+    {
+        return Micropost::where('user_id', $this->id)->orderBy('created_at', 'DESC');
+    }
+
     public static function boot()
     {
         parent::boot();

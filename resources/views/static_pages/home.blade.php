@@ -12,6 +12,10 @@
               @include('shared/micropost_form')
           </section>
         </aside>
+        <div class="span8">
+            <h3>Micropost Feed</h3>
+            @include("shared/feed")
+        </div>
     </div>
 @else
     <div class="center hero-unit">
