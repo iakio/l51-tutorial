@@ -117,8 +117,18 @@ class AuthenticationPagesTest extends TestCase
     /** @test */
     function non_sign_in_user_submitting_to_the_create_action()
     {
-        $this->withoutMiddleware()
-            ->call('post', action('MicropostsController@store'), ['content' => 'Lorem']);
-        $this->assertResponseStatus(403);
+        $this->visit('/')
+            ->makeRequest('post', action('MicropostsController@store'), ['_token' => csrf_token(), 'content' => 'Lorem'])
+            ->see('Sign in');
+    }
+
+    /** @test */
+    function non_sign_in_user_submitting_to_the_destroy_action()
+    {
+        $user = factory(App\User::class)->create();
+        $micropost = $user->microposts()->save(factory(App\Micropost::class)->make());
+        $this->visit('/')
+            ->makeRequest('delete', action('MicropostsController@destroy', $micropost->id), ['_token' => csrf_token()])
+            ->see('Sign in');
     }
 }

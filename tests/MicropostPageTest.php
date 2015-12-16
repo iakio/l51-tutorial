@@ -26,5 +26,5 @@ class MicropostPageTest extends TestCase
             ->press('Post')
             ->assertEquals(1, $user->microposts()->count());
     }
-    
+
 }

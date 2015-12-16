@@ -9,4 +9,10 @@
     <span class="timestamp">
         Posted {{ $feed_item->created_at->diffForHumans() }} ago
     </span>
+    @if (Auth::user()->id == $feed_item->user->id)
+        <a href="{{ route('micropost.destroy', $feed_item->id) }}"
+            title="{{ $feed_item->content }}"
+            data-method="delete"
+            data-confirm="You sure?">delete</a>
+    @endif
 </li>

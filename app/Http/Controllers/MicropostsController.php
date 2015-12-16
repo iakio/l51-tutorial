@@ -8,9 +8,14 @@ use App\Http\Requests\StoreMicropostRequest;
 use App\Http\Controllers\Controller;
 use App\Micropost;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 
 class MicropostsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['only' => ['store', 'destroy']]);
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,6 +39,11 @@ class MicropostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        /** @var Micropost $micropost */
+        $micropost = Auth::user()->microposts()->find($id);
+        if ($micropost) {
+            $micropost->delete();
+        }
+        return redirect('/');
     }
 }
