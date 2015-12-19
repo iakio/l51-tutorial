@@ -1,5 +1,7 @@
 <?php
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Symfony\Component\DomCrawler\Crawler;
+
 class StaticPagesTest extends TestCase
 {
     use DatabaseMigrations;
@@ -49,6 +51,28 @@ class StaticPagesTest extends TestCase
         $user->feed()->get()->each(function ($item) {
             $this->seeInElement("li#{$item->id}", $item->content);
         });
+    }
+
+
+    function seeLinkRegex($pattern)
+    {
+        $this->assertEquals(1, $this->crawler->filter('a')->reduce(function (Crawler $node) use ($pattern) {
+            return preg_match($pattern, $node->text()) === 1;
+        })->count());
+
+        return $this;
+    }
+
+    /** @test */
+    function home_page_should_render_follower_following_counts()
+    {
+        $user = factory(App\User::class)->create();
+        $other_user = factory(App\User::class)->create();
+        $other_user->follow($user);
+        $this->actingAs($user)
+            ->visit('/')
+            ->seeLinkRegex('/0\s+following/')
+            ->seeLinkRegex('/1\s+followers/');
     }
 
 }

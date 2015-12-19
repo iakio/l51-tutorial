@@ -34,6 +34,8 @@ Route::get('users/{id}/edit', 'UsersController@edit');
 Route::post('users/{id}',     'UsersController@update');
 Route::get('users',           'UsersController@index');
 Route::delete('users/{id}',   'UsersController@destroy');
+Route::get('users/{id}/following', 'UsersController@following');
+Route::get('users/{id}/followers', 'UsersController@followers');
 
 Route::get('auth/register',  'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');

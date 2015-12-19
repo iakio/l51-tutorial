@@ -29,12 +29,28 @@ class DatabaseSeeder extends Seeder
             ]);
         });
 
+        $this->makeMicroposts();
+
+        $users = User::all();
+        $user = $users->first();
+        $followed_users = $users->slice(2, 50);
+        $followers = $users->slice(3, 40);
+        $followed_users->each(function ($followed) use ($user) {
+            $user->follow($followed);
+        });
+        $followers->each(function ($follower) use ($user) {
+            $follower->follow($user);
+        });
+
+        Model::reguard();
+    }
+
+    public function makeMicroposts()
+    {
         User::all()->take(6)->each(function (User $user) {
             $user->microposts()->saveMany(
                 factory(Micropost::class, 50)->make()
             );
         });
-
-        Model::reguard();
     }
 }

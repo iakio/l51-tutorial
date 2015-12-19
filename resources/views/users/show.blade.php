@@ -10,6 +10,9 @@
                     {{ $user->name }}
                 </h1>
             </section>
+            <section>
+                @include('shared/status')
+            </section>
         </aside>
         <div class="span8">
             @if ($microposts->count() > 0)

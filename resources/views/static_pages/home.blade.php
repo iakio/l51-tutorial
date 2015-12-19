@@ -5,12 +5,15 @@
 @if (Auth::check())
     <div class="row">
         <aside class="span4">
-          <section>
-              @include('shared/user_info')
-          </section>
-          <section>
-              @include('shared/micropost_form')
-          </section>
+            <section>
+                @include('shared/user_info')
+            </section>
+            <section>
+                @include('shared/status')
+            </section>
+            <section>
+                @include('shared/micropost_form')
+            </section>
         </aside>
         <div class="span8">
             <h3>Micropost Feed</h3>
