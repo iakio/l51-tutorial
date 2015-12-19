@@ -48,6 +48,31 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return Micropost::where('user_id', $this->id)->orderBy('created_at', 'DESC');
     }
 
+    public function followers()
+    {
+        return $this->belongsToMany(User::class, 'relationships', 'followed_id', 'follower_id')->withTimestamps();
+    }
+
+    public function followed_users()
+    {
+        return $this->belongsToMany(User::class, 'relationships', 'follower_id', 'followed_id')->withTimestamps();
+    }
+
+    public function follow(User $other)
+    {
+        $this->followed_users()->attach($other->id);
+    }
+
+    public function unfollow(User $other)
+    {
+        $this->followed_users()->detach($other->id);
+    }
+
+    public function isFollowing(User $other)
+    {
+        return $this->followed_users()->where('followed_id', $other->id)->count() > 0;
+    }
+
     public static function boot()
     {
         parent::boot();
