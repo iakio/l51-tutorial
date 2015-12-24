@@ -1,12 +1,12 @@
 <?php $user = $user ?? Auth::user() ?>
 <div class="stats">
-    <a href="">
+    <a href="{{ action('UsersController@following', ['id' => $user]) }}">
         <strong id="following" class="stat">
             {{ $user->followed_users()->count() }}
         </strong>
         following
     </a>
-    <a href="">
+    <a href="{{ action('UsersController@followers', ['id' => $user]) }}">
         <strong id="followers" class="stat">
             {{ $user->followers()->count() }}
         </strong>

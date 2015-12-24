@@ -110,4 +110,30 @@ class UserPagesTest extends TestCase
             ->assertEquals($count - 1, App\User::count())
         ;
     }
+
+    /** @test */
+    function followed_users()
+    {
+        $user = factory(App\User::class)->create();
+        $other_user = factory(App\User::class)->create();
+        $user->follow($other_user);
+
+        $this->actingAs($user)
+            ->visit(action('UsersController@following', ['id' => $user]))
+            ->seeInElement('title', 'Following')
+            ->see($other_user->name);
+    }
+
+    /** @test */
+    function followers()
+    {
+        $user = factory(App\User::class)->create();
+        $other_user = factory(App\User::class)->create();
+        $user->follow($other_user);
+
+        $this->actingAs($user)
+            ->visit(action('UsersController@followers', ['id' => $other_user]))
+            ->seeInElement('title', 'Followers')
+            ->see($user->name);
+    }
 }

@@ -98,4 +98,26 @@ class UsersController extends Controller
         Flash::success('User destroyed.');
         return redirect('users');
     }
+
+    public function following($id)
+    {
+        $user = User::findOrFail($id);
+        return view('users/show_follow')
+            ->with([
+                'title' => 'Following',
+                'user' => $user,
+                'users' => $user->followed_users()->paginate()
+            ]);
+    }
+
+    public function followers($id)
+    {
+        $user = User::findOrFail($id);
+        return view('users/show_follow')
+            ->with([
+                'title' => 'Followers',
+                'user' => $user,
+                'users' => $user->followers()->paginate()
+            ]);
+    }
 }
