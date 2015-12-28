@@ -136,4 +136,20 @@ class UserPagesTest extends TestCase
             ->seeInElement('title', 'Followers')
             ->see($user->name);
     }
+
+    /** @test */
+    function follow_and_unfollow_button()
+    {
+        $user = factory(App\User::class)->create();
+        $other_user = factory(App\User::class)->create();
+        $this->actingAs($user)
+            ->visit(action('UsersController@followers', ['id' => $other_user]))
+            ->see('Follow')
+            ->makeRequest('post', action('UsersController@follow', ['id' => $other_user, '_token' => csrf_token()]))
+            ->see('Unfollow');
+        $this->assertEquals(1, $user->followed_users()->count());
+        $this->makeRequest('post', action('UsersController@unfollow', ['id' => $other_user, '_token' => csrf_token()]))
+            ->see('Follow');
+        $this->assertEquals(0, $user->followed_users()->count());
+    }
 }

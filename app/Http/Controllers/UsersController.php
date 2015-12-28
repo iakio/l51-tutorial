@@ -120,4 +120,18 @@ class UsersController extends Controller
                 'users' => $user->followers()->paginate()
             ]);
     }
+
+    public function follow($id)
+    {
+        $user = User::findOrFail($id);
+        \Auth::user()->follow($user);
+        return redirect(action('UsersController@show', ['id' => $user]));
+    }
+
+    public function unfollow($id)
+    {
+        $user = User::findOrFail($id);
+        \Auth::user()->unfollow($user);
+        return redirect(action('UsersController@show', ['id' => $user]));
+    }
 }

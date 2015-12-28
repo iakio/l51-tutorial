@@ -36,6 +36,8 @@ Route::get('users',           'UsersController@index');
 Route::delete('users/{id}',   'UsersController@destroy');
 Route::get('users/{id}/following', 'UsersController@following');
 Route::get('users/{id}/followers', 'UsersController@followers');
+Route::post('users/{id}/follow',   'UsersController@follow');
+Route::post('users/{id}/unfollow', 'UsersController@unfollow');
 
 Route::get('auth/register',  'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
