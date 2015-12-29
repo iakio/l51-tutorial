@@ -36,4 +36,19 @@ class UserTest extends TestCase
         $this->assertFalse($user2->fresh()->followers->contains($user1));
         $this->assertFalse($user1->fresh()->followed_users->contains($user2));
     }
+
+    /** @test */
+    function feed()
+    {
+        /** @var App\User $user */
+        $user = factory(App\User::class)->create();
+        $unfollowed_user = factory(App\User::class)->create();
+        $followed_user = factory(App\User::class)->create();
+        $unfollowed_feed = factory(App\Micropost::class)->create(['user_id' => $unfollowed_user->id]);
+        $followed_feed = factory(App\Micropost::class)->create(['user_id' => $followed_user->id]);
+        $user->follow($followed_user);
+
+        $this->assertTrue($user->feed()->get()->contains($followed_feed));
+        $this->assertFalse($user->feed()->get()->contains($unfollowed_feed));
+    }
 }

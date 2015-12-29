@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
@@ -43,9 +44,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany(Micropost::class)->orderBy('created_at', 'DESC');
     }
 
+    /**
+     * @return Builder
+     */
     public function feed()
     {
-        return Micropost::where('user_id', $this->id)->orderBy('created_at', 'DESC');
+        return Micropost::whereExists(function (\Illuminate\Database\Query\Builder $q) {
+            $q->select()
+                ->from('relationships')
+                ->whereRaw('microposts.user_id = relationships.followed_id')
+                ->where('follower_id', '=', $this->id);
+        })->orderBy('microposts.created_at', 'DESC');
     }
 
     public function followers()
