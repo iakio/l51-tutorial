@@ -11,18 +11,18 @@
                 </h1>
             </section>
             <section>
-                @include('shared/status')
+                @include('shared.status')
             </section>
         </aside>
         <div class="span8">
             @if (Auth::check())
-                @include('users/follow_form')
+                @include('users.follow_form')
             @endif
             @if ($microposts->count() > 0)
                 <h3>Microposts ({{ $user->microposts->count() }})</h3>
                 <ol class="microposts">
                 @foreach ($microposts as $micropost)
-                    @include("microposts/_micropost")
+                    @include("microposts._micropost")
                 @endforeach
                 </ol>
                 <nav class="pagination">

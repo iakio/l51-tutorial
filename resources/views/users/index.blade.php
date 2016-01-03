@@ -9,7 +9,7 @@
 </nav>
 <ul class="users">
     @foreach ($users as $user)
-        @include('users/user')
+        @include('users.user')
     @endforeach
 </ul>
 <nav class="pagination">

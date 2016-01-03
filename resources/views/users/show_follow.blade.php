@@ -12,7 +12,7 @@
                 <span><b>Microposts:</b> {{ $user->microposts()->count() }}</span>
             </section>
             <section>
-                @include('shared/status')
+                @include('shared.status')
                 @if ($users->count() > 0)
                     <div class="user_avatars">
                         @foreach ($users as $user)
@@ -29,7 +29,7 @@
             @if ($users->count() > 0)
                 <ul class="users">
                     @foreach ($users as $user)
-                        @include('users/user')
+                        @include('users.user')
                     @endforeach
                 </ul>
                 <nav class="pagination">

@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="span6 offset3">
-        @include('shared/error_messages')
+        @include('shared.error_messages')
         {!! Form::model($user, ['url' => action('UsersController@update', $user->id), 'method' => 'patch']) !!}
 
         {!! Form::label('name') !!}

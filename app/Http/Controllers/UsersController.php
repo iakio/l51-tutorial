@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users/index')->with("users", User::paginate(30));
+        return view('users.index')->with("users", User::paginate(30));
     }
 
     /**
@@ -38,7 +38,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $microposts = $user->microposts()->paginate(30);
-        return view('users/show')->with([
+        return view('users.show')->with([
             "user" => $user,
             "microposts" => $microposts
         ]);
@@ -53,7 +53,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('users/edit')->with("user", $user);
+        return view('users.edit')->with("user", $user);
     }
 
     /**
@@ -82,7 +82,7 @@ class UsersController extends Controller
             Flash::success("Profile updated");
             return redirect(action('UsersController@show', $user->id));
         }
-        return view('users/edit')->with("user", $user);
+        return view('users.edit')->with("user", $user);
     }
 
 
@@ -102,7 +102,7 @@ class UsersController extends Controller
     public function following($id)
     {
         $user = User::findOrFail($id);
-        return view('users/show_follow')
+        return view('users.show_follow')
             ->with([
                 'title' => 'Following',
                 'user' => $user,
@@ -113,7 +113,7 @@ class UsersController extends Controller
     public function followers($id)
     {
         $user = User::findOrFail($id);
-        return view('users/show_follow')
+        return view('users.show_follow')
             ->with([
                 'title' => 'Followers',
                 'user' => $user,
