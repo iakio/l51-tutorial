@@ -8,7 +8,7 @@
                 <h1>
                     {{ $user->name }}
                 </h1>
-                <span><a href="{{ action('UsersController@show', ['id' => $user]) }}">view my  profile</a></span>
+                <span><a href="{{ action('UsersController@show', ['user' => $user]) }}">view my  profile</a></span>
                 <span><b>Microposts:</b> {{ $user->microposts()->count() }}</span>
             </section>
             <section>
@@ -16,7 +16,7 @@
                 @if ($users->count() > 0)
                     <div class="user_avatars">
                         @foreach ($users as $user)
-                            <a href="{{ action('UsersController@show', ['id' => $user]) }}">
+                            <a href="{{ action('UsersController@show', ['user' => $user]) }}">
                                 {!! Html::gravatar_for($user, ['size' => 30]) !!}
                             </a>
                         @endforeach

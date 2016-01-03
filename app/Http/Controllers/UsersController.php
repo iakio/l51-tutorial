@@ -31,12 +31,11 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
         $microposts = $user->microposts()->paginate(30);
         return view('users.show')->with([
             "user" => $user,
@@ -47,12 +46,11 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        $user = User::find($id);
         return view('users.edit')->with("user", $user);
     }
 
@@ -60,15 +58,14 @@ class UsersController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
         $validators = [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users,'.$id,
+            'email' => 'required|email|max:255|unique:users,'.$user->id,
             'password' => 'required|confirmed|min:6',
         ];
         $attributes = [
@@ -89,19 +86,18 @@ class UsersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  User $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        User::findOrFail($id)->delete();
+        $user->delete();
         Flash::success('User destroyed.');
         return redirect(action('UsersController@index'));
     }
 
-    public function following($id)
+    public function following(User $user)
     {
-        $user = User::findOrFail($id);
         return view('users.show_follow')
             ->with([
                 'title' => 'Following',
@@ -110,9 +106,8 @@ class UsersController extends Controller
             ]);
     }
 
-    public function followers($id)
+    public function followers(User $user)
     {
-        $user = User::findOrFail($id);
         return view('users.show_follow')
             ->with([
                 'title' => 'Followers',
@@ -121,17 +116,15 @@ class UsersController extends Controller
             ]);
     }
 
-    public function follow($id)
+    public function follow(User $user)
     {
-        $user = User::findOrFail($id);
         \Auth::user()->follow($user);
-        return redirect(action('UsersController@show', ['id' => $user]));
+        return redirect(action('UsersController@show', ['user' => $user]));
     }
 
-    public function unfollow($id)
+    public function unfollow(User $user)
     {
-        $user = User::findOrFail($id);
         \Auth::user()->unfollow($user);
-        return redirect(action('UsersController@show', ['id' => $user]));
+        return redirect(action('UsersController@show', ['user' => $user]));
     }
 }

@@ -1,3 +1,3 @@
-{!! Form::open(['action' => ['UsersController@unfollow', 'id' => $user]]) !!}
+{!! Form::open(['action' => ['UsersController@unfollow', 'user' => $user]]) !!}
     {!! Form::submit('Unfollow', ['class' => 'btn btn-large']) !!}
 {!! Form::close() !!}
