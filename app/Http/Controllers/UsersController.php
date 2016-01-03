@@ -96,7 +96,7 @@ class UsersController extends Controller
     {
         User::findOrFail($id)->delete();
         Flash::success('User destroyed.');
-        return redirect('users');
+        return redirect(action('UsersController@index'));
     }
 
     public function following($id)

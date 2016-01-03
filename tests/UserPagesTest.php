@@ -12,7 +12,7 @@ class UserPagesTest extends TestCase
         $user = factory(App\User::class)->create();
         $m1 = factory(App\Micropost::class)->create(['user_id' => $user->id]);
         $m2 = factory(App\Micropost::class)->create(['user_id' => $user->id]);
-        $this->visit('users/' . $user->id)
+        $this->visit(action('UsersController@show', $user->id))
             ->see($user->name)
             ->see($m1->content)
             ->see($m2->content)

@@ -30,13 +30,13 @@ class AuthenticationPagesTest extends TestCase
             ->type($input->email, 'email')
             ->type($input->password, 'password')
             ->press('Sign in')
-            ->seePageIs('users/'.$user->id)
+            ->seePageIs('user/'.$user->id)
             ->see($user->name)
             ->dontSeeLink('Sign in')
             ->seeLink('Sign out', 'auth/logout')
-            ->seeLink('Users', 'users/')
-            ->seeLink('Profile', 'users/'.$user->id)
-            ->seeLink('Settings', 'users/'.$user->id.'/edit')
+            ->seeLink('Users', 'user/')
+            ->seeLink('Profile', 'user/'.$user->id)
+            ->seeLink('Settings', 'user/'.$user->id.'/edit')
             ;
     }
 

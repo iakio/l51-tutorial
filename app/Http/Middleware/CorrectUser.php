@@ -15,7 +15,7 @@ class CorrectUser
      */
     public function handle($request, Closure $next)
     {
-        if (intval($request->route()->getParameter('id')) !== intval($request->user()->id)) {
+        if (intval($request->route()->getParameter('user')) !== intval($request->user()->id)) {
             return redirect('/');
         }
         return $next($request);

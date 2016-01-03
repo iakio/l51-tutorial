@@ -29,15 +29,12 @@ Route::get('about', function () {
     return view('static_pages.about');
 });
 
-Route::get('users/{id}',      'UsersController@show');
-Route::get('users/{id}/edit', 'UsersController@edit');
-Route::post('users/{id}',     'UsersController@update');
-Route::get('users',           'UsersController@index');
-Route::delete('users/{id}',   'UsersController@destroy');
-Route::get('users/{id}/following', 'UsersController@following');
-Route::get('users/{id}/followers', 'UsersController@followers');
-Route::post('users/{id}/follow',   'UsersController@follow');
-Route::post('users/{id}/unfollow', 'UsersController@unfollow');
+Route::resource('user', 'UsersController', ['only' => ['show', 'edit', 'update', 'index', 'destroy']]);
+
+Route::get('user/{id}/following', 'UsersController@following');
+Route::get('user/{id}/followers', 'UsersController@followers');
+Route::post('user/{id}/follow',   'UsersController@follow');
+Route::post('user/{id}/unfollow', 'UsersController@unfollow');
 
 Route::get('auth/register',  'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');

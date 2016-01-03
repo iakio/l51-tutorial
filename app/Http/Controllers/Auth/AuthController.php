@@ -92,7 +92,7 @@ class AuthController extends Controller
     {
         $user = Auth::user();
         if ($user) {
-            return "users/" . $user->id;
+            return action('UsersController@show', $user->id);
         }
         return "/";
     }
