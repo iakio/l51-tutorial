@@ -31,10 +31,10 @@ Route::get('about', function () {
 
 Route::resource('user', 'UsersController', ['only' => ['show', 'edit', 'update', 'index', 'destroy']]);
 
-Route::get('user/{user}/following', 'UsersController@following');
-Route::get('user/{user}/followers', 'UsersController@followers');
-Route::post('user/{user}/follow',   'UsersController@follow');
-Route::post('user/{user}/unfollow', 'UsersController@unfollow');
+Route::get('user/{user}/following', 'UsersController@following')->name('user.following');
+Route::get('user/{user}/followers', 'UsersController@followers')->name('user.followers');
+Route::post('user/{user}/follow',   'UsersController@follow')->name('user.follow');
+Route::post('user/{user}/unfollow', 'UsersController@unfollow')->name('user.unfollow');
 
 Route::get('auth/register',  'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');

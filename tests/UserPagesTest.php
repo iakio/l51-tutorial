@@ -143,12 +143,12 @@ class UserPagesTest extends TestCase
         $user = factory(App\User::class)->create();
         $other_user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->visit(action('UsersController@followers', ['id' => $other_user]))
+            ->visit(action('UsersController@followers', ['user' => $other_user]))
             ->see('Follow')
-            ->makeRequest('post', action('UsersController@follow', ['id' => $other_user, '_token' => csrf_token()]))
+            ->makeRequest('post', action('UsersController@follow', ['user' => $other_user, '_token' => csrf_token()]))
             ->see('Unfollow');
         $this->assertEquals(1, $user->followed_users()->count());
-        $this->makeRequest('post', action('UsersController@unfollow', ['id' => $other_user, '_token' => csrf_token()]))
+        $this->makeRequest('post', action('UsersController@unfollow', ['user' => $other_user, '_token' => csrf_token()]))
             ->see('Follow');
         $this->assertEquals(0, $user->followed_users()->count());
     }
