@@ -1,4 +1,6 @@
 <?php
+use App\User;
+
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 class AuthenticationPagesTest extends TestCase
 {
@@ -15,7 +17,7 @@ class AuthenticationPagesTest extends TestCase
     }
 
     function createUser($input) {
-        return App\User::create([
+        return User::create([
             'name' => $input->name,
             'email' => $input->email,
             'password' => bcrypt($input->password),
@@ -24,7 +26,7 @@ class AuthenticationPagesTest extends TestCase
 
     /** @test */
     function sign_in_with_valid_information() {
-        $input = factory(App\User::class)->make();
+        $input = factory(User::class)->make();
         $user = $this->createUser($input);
         $this->visit('auth/login')
             ->type($input->email, 'email')
@@ -42,7 +44,7 @@ class AuthenticationPagesTest extends TestCase
 
     /** @test */
     function non_signed_in_user_visiting_the_edit_page() {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
         $this->visit(action('UsersController@edit', $user->id))
             ->seeInElement('title', 'Sign in')
             ;
@@ -50,7 +52,7 @@ class AuthenticationPagesTest extends TestCase
 
     /** @test */
     function non_signed_in_user_submitting_to_the_update_action() {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
         $this->call('post', action('UsersController@update', $user->id));
         //$this->assertRedirectedTo('auth/login');
         $this->assertResponseStatus(500);
@@ -58,8 +60,8 @@ class AuthenticationPagesTest extends TestCase
 
     /** @test */
     function wrong_user_visiting_the_edit_page() {
-        $user = factory(App\User::class)->create();
-        $wrong_user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
+        $wrong_user = factory(User::class)->create();
         $this->actingAs($user)
             ->call('get', action('UsersController@edit', $wrong_user->id))
         ;
@@ -68,8 +70,8 @@ class AuthenticationPagesTest extends TestCase
 
     /** @test */
     function wrong_user_submitting_to_the_update_action() {
-        $user = factory(App\User::class)->create();
-        $wrong_user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
+        $wrong_user = factory(User::class)->create();
         $this->actingAs($user)
             ->call('post', action('UsersController@update', $wrong_user->id));
         ;
@@ -79,7 +81,7 @@ class AuthenticationPagesTest extends TestCase
 
     /** @test */
     function friendly_forwarding() {
-        $input = factory(App\User::class)->make();
+        $input = factory(User::class)->make();
         $user = $this->createUser($input);
         $this->visit(action('UsersController@edit', $user->id))
             ->type($input->email, 'email')
@@ -92,7 +94,7 @@ class AuthenticationPagesTest extends TestCase
 
     /** @test */
     function non_signed_in_user_visiting_the_user_index() {
-        $input = factory(App\User::class)->make();
+        $input = factory(User::class)->make();
         $user = $this->createUser($input);
 
         $this->visit(action('UsersController@index'))
@@ -103,8 +105,8 @@ class AuthenticationPagesTest extends TestCase
     /** @test */
     function non_admin_user_submitting_a_delete_request()
     {
-        $user = factory('App\User')->create();
-        $non_admin = factory('App\User')->create();
+        $user = factory(User::class)->create();
+        $non_admin = factory(User::class)->create();
         $this->actingAs($non_admin)
             ->visit(action('UsersController@index'))
             ->makeRequest('delete', action('UsersController@destroy', $user->id), [
@@ -125,7 +127,7 @@ class AuthenticationPagesTest extends TestCase
     /** @test */
     function non_sign_in_user_submitting_to_the_destroy_action()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
         $micropost = $user->microposts()->save(factory(App\Micropost::class)->make());
         $this->visit('/')
             ->makeRequest('delete', action('MicropostsController@destroy', $micropost->id), ['_token' => csrf_token()])

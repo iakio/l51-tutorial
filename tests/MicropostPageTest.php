@@ -1,4 +1,6 @@
 <?php
+use App\User;
+
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class MicropostPageTest extends TestCase
@@ -8,7 +10,7 @@ class MicropostPageTest extends TestCase
     /** @test */
     function create_with_invalid_information()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
         $this->actingAs($user)
             ->visit('/')
             ->press('Post')
@@ -19,7 +21,7 @@ class MicropostPageTest extends TestCase
     /** @test */
     function create_with_valid_information()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
         $this->actingAs($user)
             ->visit('/')
             ->type('Lorem ipsum', 'content')

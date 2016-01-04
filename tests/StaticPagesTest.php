@@ -30,14 +30,12 @@ class StaticPagesTest extends TestCase
 
     public function dontSeeInTitle($text)
     {
-        $this->assertNotContains($text, $this->crawler->filter("title")->text());
-        return $this;
+        return $this->dontSeeInElement("title", $text);
     }
 
     public function seeInTitle($text)
     {
-        $this->assertContains($text, $this->crawler->filter("title")->text());
-        return $this;
+        return $this->seeInElement("title", $text);
     }
 
     /** @test */
